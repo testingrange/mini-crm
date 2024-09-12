@@ -38,7 +38,7 @@ export default function UserInput() {
           <Input label="DOB" name="dob" type="date" ref={dobRef} />
         </div>
         <div>
-          <Input label="SSN" name="ssn" type="number" ref={ssnRef} />
+          <Input label="SSN" name="ssn" type="text" required pattern="\d{3}-?\d{2}-?\d{4}" ref={ssnRef} />
           <Input label="Email" name="email" type="email" ref={emailRef} />
           <Input label="Salary/yr" name="salary" type="number" ref={salaryRef} />
         </div>

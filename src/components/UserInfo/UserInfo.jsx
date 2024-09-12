@@ -5,11 +5,11 @@ import UserEdit from './UserEdit'
 
 export default function UserInfo() {
 
-    const { editEmployee } = useContext(EmployeeContext)
+    const { employeeEditing } = useContext(EmployeeContext)
 
     return (
         <>
-            <UserInput />
+            {employeeEditing.editing ? <UserEdit /> : <UserInput />}
         </>
     )
 }

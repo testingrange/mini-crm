@@ -7,6 +7,7 @@ export const EmployeeContext = createContext({
   deleteEmployee: () => {},
   editEmployee: () => {},
   cancelEditing: () => {},
+  updateEmployee: () => {},
 });
 
 const employeesDataReducer = (state, action) => {
@@ -84,6 +85,32 @@ const employeesDataReducer = (state, action) => {
       ...state,
       employeeEditing: employeeEditing,
     };
+  } else if (action.type === "UPDATE_EMPLOYEE") {
+    const updatedEmployee = [...state.employeesData]
+    console.log("State.employee.id id - ", state.employeeEditing.id)
+    console.log("updatedEmployee is ", updatedEmployee)
+    const editedEmployee = updatedEmployee.filter(employee => employee.id === state.employeeEditing.id)[0]
+    console.log("Edited Employee is ", editedEmployee)
+    editedEmployee.firstName = action.payload.firstName
+    editedEmployee.lastName = action.payload.lastName;
+    editedEmployee.dob = action.payload.dob;
+    editedEmployee.ssn = action.payload.ssn
+    editedEmployee.email = action.payload.email
+    editedEmployee.salary = action.payload.salary
+    editedEmployee.street = action.payload.street
+    editedEmployee.aptnum = action.payload.aptnum
+    editedEmployee.state = action.payload.state
+    editedEmployee.zip = action.payload.zip
+    editedEmployee.phoneNum = action.payload.phoneNum
+    editedEmployee.position = action.payload.position
+    editedEmployee.info = action.payload.info
+
+    console.log("Updated Employee with id - , ", editedEmployee.id, " is: ", editedEmployee)
+
+    return {
+        ...state,
+        employeesData: updatedEmployee
+    }
   }
 };
 
@@ -138,7 +165,6 @@ export default function EmployeeContextProvider({ children }) {
   };
 
   const handleUpdateEmployee = (
-    employeeId,
     firstName,
     lastName,
     dob,
@@ -156,7 +182,6 @@ export default function EmployeeContextProvider({ children }) {
     employeesDatadispatch({
       type: "UPDATE_EMPLOYEE",
       payload: {
-        employeeId: employeeId,
         firstName: firstName,
         lastName: lastName,
         dob: dob,
@@ -181,6 +206,7 @@ export default function EmployeeContextProvider({ children }) {
     deleteEmployee: handleDeleteEmployee,
     editEmployee: handleEditEmployee,
     cancelEditing: handleCancelEmployeeEditing,
+    updateEmployee: handleUpdateEmployee,
   };
 
   return (

@@ -24,13 +24,13 @@ const employeesDataReducer = (state, action) => {
       ssn: action.payload.ssn,
       email: action.payload.email,
       salary: action.payload.salary,
-      street: undefined,
-      aptnum: undefined,
-      state: undefined,
-      zip: undefined,
-      phoneNum: undefined,
-      position: undefined,
-      info: undefined,
+      street: '',
+      aptnum: '',
+      state: '',
+      zip: '',
+      phoneNum: '',
+      position: '',
+      info: '',
     });
     console.log("Updated Employees ", updatedEmployees);
     console.log("StateEmployees Data ", state.employeesData);
@@ -192,7 +192,7 @@ export default function EmployeeContextProvider({ children }) {
         aptnum: aptnum,
         state: state,
         zip: zip,
-        phoneNUm: phoneNum,
+        phoneNum: phoneNum,
         position: position,
         info: info
       },

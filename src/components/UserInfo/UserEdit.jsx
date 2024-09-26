@@ -1,4 +1,4 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext, useEffect } from "react";
 import { EmployeeContext } from "../../store/employees-context";
 import Input from "../Input";
 
@@ -11,68 +11,119 @@ export default function UserEdit() {
   )[0];
 
   console.log("Editing Data, ", editData);
+  
+  const inputRefs = useRef({})
 
-  const firstNameRef = useRef(editData.firstName);
-  const lastNameRef = useRef(editData.lastName);
-  const dobRef = useRef(editData.dob);
-  const ssnRef = useRef(editData.ssn);
-  const emailRef = useRef(editData.email);
-  const salaryRef = useRef(editData.salary);
-  const streetRef = useRef(editData.street);
-  const aptRef = useRef(editData.aptnum);
-  const stateRef = useRef(editData.state);
-  const zipRef = useRef(editData.zip);
-  const phoneRef = useRef(editData.phoneNum);
-  const posRef = useRef(editData.position);
-  const infoRef = useRef(editData.info);
 
+  useEffect(() => {
+    if (inputRefs.current.firstName) {
+        inputRefs.current.firstName.value = editData.firstName
+    }
+    if (inputRefs.current.lastName) {
+        inputRefs.current.lastName.value = editData.lastName
+    }
+    if (inputRefs.current.dob) {
+        inputRefs.current.dob.value = editData.dob
+    }
+    if (inputRefs.current.ssn) {
+        inputRefs.current.ssn.value = editData.ssn
+    }
+    if (inputRefs.current.email) {
+        inputRefs.current.email.value = editData.email
+    }
+    if (inputRefs.current.salary) {
+        inputRefs.current.salary.value = editData.salary
+    }
+    if (inputRefs.current.street) {
+        inputRefs.current.street.value = editData.street
+    }
+    if (inputRefs.current.aptNum) {
+        inputRefs.current.aptNum.value = editData.aptnum
+    }
+    if (inputRefs.current.state) {
+        inputRefs.current.state.value = editData.state
+    }
+    if (inputRefs.current.zip) {
+        inputRefs.current.zip.value = editData.zip
+    }
+    if (inputRefs.current.phoneNum) {
+        inputRefs.current.phoneNum.value = editData.phoneNum
+    }
+    if (inputRefs.current.position) {
+        inputRefs.current.position.value = editData.position
+    }
+    if (inputRefs.current.info) {
+        inputRefs.current.info.value = editData.info
+    }
+  }, [])
+    
+    
   const handleCancelEditing = () => {
     console.log(editData);
     cancelEditing();
   };
 
+//   const handleUpdateEmployee = () => {
+//     console.log("HandleUpdateEmployee was called");
+//     updateEmployee(
+//       firstNameRef.current.value,
+//       lastNameRef.current.value,
+//       dobRef.current.value,
+//       ssnRef.current.value,
+//       emailRef.current.value,
+//       salaryRef.current.value,
+//       streetRef.current.value,
+//       aptRef.current.value,
+//       stateRef.current.value,
+//       zipRef.current.value,
+//       phoneRef.current.value,
+//       posRef.current.value,
+//       infoRef.current.value
+//     );
+//   };
+
   const handleUpdateEmployee = () => {
     console.log("HandleUpdateEmployee was called");
     updateEmployee(
-      firstNameRef.current.value,
-      lastNameRef.current.value,
-      dobRef.current.value,
-      ssnRef.current.value,
-      emailRef.current.value,
-      salaryRef.current.value,
-      streetRef.current.value,
-      aptRef.current.value,
-      stateRef.current.value,
-      zipRef.current.value,
-      phoneRef.current.value,
-      posRef.current.value,
-      infoRef.current.value
+      inputRefs.current.firstName.value,
+      inputRefs.current.lastName.value,
+      inputRefs.current.dob.value,
+      inputRefs.current.ssn.value,
+      inputRefs.current.email.value,
+      inputRefs.current.salary.value,
+      inputRefs.current.street.value,
+      inputRefs.current.aptNum.value,
+      inputRefs.current.state.value,
+      inputRefs.current.zip.value,
+      inputRefs.current.phoneNum.value,
+      inputRefs.current.position.value,
+      inputRefs.current.info.value
     );
   };
 
+//   console.log("firstNameRef.current.value is ", firstNameRef.current.value)
+
   return (
+    
     <div className="flex justify-center gap-10 my-12">
       <div>
         <Input
           label="FirstName"
           name="fname"
           type="text"
-          value={editData.firstName}
-          ref={firstNameRef}
+          ref={el => inputRefs.current.firstName = el}
         />
         <Input
           label="LastName"
           name="lname"
           type="text"
-        //   value={editData.lastName}
-          ref={lastNameRef}
+          ref={el => inputRefs.current.lastName = el}
         />
         <Input
           label="DOB"
           name="dob"
           type="date"
-        //   value={editData.dob}
-          ref={dobRef}
+          ref={el => inputRefs.current.dob = el}
         />
       </div>
       <div>
@@ -80,22 +131,20 @@ export default function UserEdit() {
           label="SSN"
           name="ssn"
           type="number"
-        //   value={editData.ssn}
-          ref={ssnRef}
+
+          ref={el => inputRefs.current.ssn = el}
         />
         <Input
           label="Email"
           name="email"
           type="text"
-        //   value={editData.email}
-          ref={emailRef}
+          ref={el => inputRefs.current.email = el}
         />
         <Input
           label="Salary/yr"
           name="salary"
           type="number"
-        //   value={editData.salary}
-          ref={salaryRef}
+          ref={el => inputRefs.current.salary = el}
         />
       </div>
       <div>
@@ -103,22 +152,19 @@ export default function UserEdit() {
           label="Street"
           name="street"
           type="text"
-        //   value={editData.street}
-          ref={streetRef}
+          ref={el => inputRefs.current.street = el}
         />
         <Input
           label="AptNumber"
           name="aptnum"
           type="text"
-        //   value={editData.aptnum}
-          ref={aptRef}
+          ref={el => inputRefs.current.aptNum = el}
         />
         <Input
           label="State"
           name="state"
           type="text"
-        //   value={editData.state}
-          ref={stateRef}
+          ref={el => inputRefs.current.state = el}
         />
       </div>
       <div>
@@ -126,22 +172,19 @@ export default function UserEdit() {
           label="Zip"
           name="zip"
           type="number"
-        //   value={editData.zip}
-          ref={zipRef}
+          ref={el => inputRefs.current.zip = el}
         />
         <Input
           label="Phone"
           name="phoneNum"
           type="tel"
-        //   value={editData.phoneNum}
-          ref={phoneRef}
+          ref={el => inputRefs.current.phoneNum = el}
         />
         <Input
           label="Position"
           name="position"
           type="text"
-        //   value={editData.position}
-          ref={posRef}
+          ref={el => inputRefs.current.position = el}
         />
       </div>
       <div>
@@ -149,8 +192,7 @@ export default function UserEdit() {
           label="Info"
           name="info"
           type="textarea"
-        //   value={editData.info}
-          ref={infoRef}
+          ref={el => inputRefs.current.info = el}
         />
       </div>
       <div>
